@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,10 +29,12 @@ public class Livro implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, nome);
-	}
+	private String nome;
+	
+	@ManyToOne
+	@JoinColumn(name = "autor_id")
+	private Autor autor;
+		
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -41,6 +45,10 @@ public class Livro implements Serializable {
 			return false;
 		Livro other = (Livro) obj;
 		return Objects.equals(id, other.id) && Objects.equals(nome, other.nome);
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nome);
 	}
 	public Long getId() {
 		return id;
@@ -53,6 +61,6 @@ public class Livro implements Serializable {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	private String nome;
+}
+
 }

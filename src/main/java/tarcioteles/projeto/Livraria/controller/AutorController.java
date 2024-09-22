@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tarcioteles.projeto.Livraria.entities.Livro;
-import tarcioteles.projeto.Livraria.service.LivroService;
+import tarcioteles.projeto.Livraria.entities.Autor;
+import tarcioteles.projeto.Livraria.service.AutorService;
 
 @RestController
-@RequestMapping(value = "/livros")
+@RequestMapping(value = "/autor")
 
-public class LivroController {
+public class AutorController {
 	@Autowired
-	private LivroService service;
+	private AutorService service;
 	
 	@PostMapping
-	public ResponseEntity<Livro> create(@RequestBody Livro obj) {
+	public ResponseEntity<Autor> create(@RequestBody Autor obj) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.create(obj));				
 	}
 	
@@ -36,17 +36,17 @@ public class LivroController {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Livro> getId(@PathVariable Long id) {
+	public ResponseEntity<Autor> getId(@PathVariable Long id) {
 		return ResponseEntity.ok().body(service.getId(id));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Livro>> getAll() {
+	public ResponseEntity<List<Autor>> getAll() {
 		return ResponseEntity.ok().body(service.getAll());
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Livro> update(@PathVariable Long id, @RequestBody Livro obj) {
+	public ResponseEntity<Autor> update(@PathVariable Long id, @RequestBody Autor obj) {
 		obj.setId(id);
 		return ResponseEntity.ok().body(service.update(obj));
 	}
